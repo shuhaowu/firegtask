@@ -31,7 +31,6 @@
     };
 
     this.getOauthInfo = function() {
-      console.log(localStorage.oauthInfo);
       return localStorage.oauthInfo ? JSON.parse(localStorage.oauthInfo) : null;
     };
 
@@ -39,7 +38,7 @@
       var deferred = $q.defer();
 
       var oauthInfo = this.getOauthInfo();
-      if (oauthInfo.refresh_token) {
+      if (oauthInfo && oauthInfo.refresh_token) {
 
         var data = {
           client_secret: CLIENT_SECRET,

@@ -36,6 +36,13 @@
     </article>
   </section>
 
+  <div ng-controller="ToastController">
+    <section role="status" ng-class="{onviewport: displayed, hidden: !displayed, 'has-icon': showclose}">
+      <a href="" class="close icon" ng-show="showclose" ng-click="untoast()">&times;</a>
+      <p ng-bind-html-unsafe="html"></p>
+    </section>
+  </div>
+
   <script type="text/javascript" src="js/settings.js"></script>
   <script type="text/javascript" src="vendors/angular.min.js"></script>
   {% for script in scripts %}<script src="{[ script ]}"></script>

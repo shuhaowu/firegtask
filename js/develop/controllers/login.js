@@ -20,11 +20,14 @@
     $scope.authcode = "";
     $scope.authorize = function() {
       OAuthService.authorize($scope.authcode).then(function() {
+        $scope.toast({message: "You have been logged in!", autoclose: 1500});
         $scope.authorized = true;
         $scope.attempting = false;
         if ($scope.popup)
           $scope.popup.close();
       }, function(e) {
+        $scope.toast({message: "An error occured!", autoclose: 1500});
+        $scope.attempting = false;
         console.log(e);
       });
     };

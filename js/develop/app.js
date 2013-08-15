@@ -27,4 +27,14 @@ window.paramify = function(obj) {
     });
   }]);
 
+  app.run(["$rootScope", function($rootScope) {
+    $rootScope.toast = function(toast) {
+      $rootScope.$broadcast('toast', toast);
+    };
+
+    $rootScope.untoast = function() {
+      $rootScope.$broadcast('untoast');
+    };
+  }]);
+
 })();

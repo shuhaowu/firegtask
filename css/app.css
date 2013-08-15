@@ -30,3 +30,34 @@ progress.center {
   font-size: 1.8rem;
   text-align: center;
 }
+
+section[role="status"].has-icons {
+  padding-right: 55px;
+}
+
+section[role="status"].has-icons p {
+  margin: 1rem 0 1rem 2rem;
+}
+
+section[role="status"] a.icon {
+  width: 30px;
+  text-align: center;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translate(0, -50%);
+  display: block;
+  opacity: 0.8;
+}
+
+section[role="status"] a.icon.close {
+  font-size: 3rem;
+  color: #FFF;
+  text-decoration: none;
+  outline: none;
+}
+
+section[role="status"] a.icon:hover {
+  opacity: 1;
+}
+
