@@ -1,0 +1,15 @@
+{
+  "name": "GTask",
+  "description": "Google Task for your Firefox OS devices",
+  "version": "1.0",
+  "release_notes": "First release",
+  "launch_path": "/",
+  "icons": {
+    "128": "/img/icon-128.png"
+  },
+  "developer": {
+    "name": "Shuhao Wu",
+    "url": "https://shuhaowu.com"
+  },
+  "default_locale": "en"
+}

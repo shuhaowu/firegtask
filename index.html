@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no" />
+  <link rel="stylesheet" href="vendors/fxos.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body role="application" ng-app="fxgtask">
+  <section data-type="sidebar" ng-controller="SidebarController">
+    <header>
+      <h1>Menu</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="#settings">Settings</a></li>
+        <li><a href="#login">Login via Google</a></li>
+      </ul>
+      <h2>Logistics</h2>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="">Code</a></li>
+      </ul>
+    </nav>
+  </section>
+
+  <section id="drawer" role="region">
+    <header class="fixed">
+      <a href="#"><span class="icon icon-menu">hide sidebar</span></a>
+      <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
+      <h1>GTask <em>for Firefox OS</em></h1>
+    </header>
+    <article class="content scrollable header">
+      <ng-view></ng-view>
+    </article>
+  </section>
+
+  <script type="text/javascript" src="vendors/angular.min.js"></script>
+  {% for script in scripts %}<script src="{[ script ]}"></script>
+  {% endfor %}
+</body>
+</html>

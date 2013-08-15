@@ -1,0 +1,8 @@
+.center {
+  text-align: center;
+}
+
+progress.center {
+  margin: 3rem auto 0 auto;
+  display: block;
+}
