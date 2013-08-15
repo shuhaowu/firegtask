@@ -6,3 +6,27 @@ progress.center {
   margin: 3rem auto 0 auto;
   display: block;
 }
+
+.list-style-container select,
+.list-style-container input{
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.list-style-container label,
+.list-style-container p {
+  display: block;
+  margin: 1rem 0;
+  width: 100%;
+  font-size: 1.8rem;
+}
+
+.list-style-container hr {
+  margin: 1.5rem 0;
+}
+
+.list-style-container h1 {
+  font-weight: 400;
+  font-size: 1.8rem;
+  text-align: center;
+}

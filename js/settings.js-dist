@@ -1,0 +1,5 @@
+window.GOOGLE_AUTH_BASE = "https://accounts.google.com/o/oauth2/auth"
+window.SCOPES = encodeURIComponent("https://www.googleapis.com/auth/tasks");
+window.CLIENT_ID = "GOOGLE-API-CLIENT-ID";
+window.CLIENT_SECRET = "GOOGLE-API-CLIENT-SECRET";
+window.REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob";

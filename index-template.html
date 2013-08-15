@@ -7,12 +7,13 @@
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body role="application" ng-app="fxgtask">
-  <section data-type="sidebar" ng-controller="SidebarController">
+  <section data-type="sidebar">
     <header>
       <h1>Menu</h1>
     </header>
     <nav>
       <ul>
+        <li><a href="#">Tasks</a></li>
         <li><a href="#settings">Settings</a></li>
         <li><a href="#login">Login via Google</a></li>
       </ul>
@@ -28,13 +29,14 @@
     <header class="fixed">
       <a href="#"><span class="icon icon-menu">hide sidebar</span></a>
       <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
-      <h1>GTask <em>for Firefox OS</em></h1>
+      <h1 id="title">FireGTask</h1>
     </header>
     <article class="content scrollable header">
       <ng-view></ng-view>
     </article>
   </section>
 
+  <script type="text/javascript" src="js/settings.js"></script>
   <script type="text/javascript" src="vendors/angular.min.js"></script>
   {% for script in scripts %}<script src="{[ script ]}"></script>
   {% endfor %}

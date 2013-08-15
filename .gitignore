@@ -1,3 +1,4 @@
 packages/*.zip
 js/app.js
-
+index.html
+js/settings.js

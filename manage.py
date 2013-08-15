@@ -4,16 +4,17 @@ import argparse
 import os
 import logging
 import subprocess
+from jinja2 import Template
 logging.basicConfig(level=logging.DEBUG)
 
 def get_all_script_paths(build=False):
   if build:
     return ["js/app.js"]
   else:
-    scripts = []
+    scripts = ["js/develop/app.js"]
     for root, subdirs, files in os.walk("js/develop"):
       for fname in files:
-        if fname.endswith(".js"):
+        if fname.endswith(".js") and fname != "app.js":
           scripts.append(os.path.join(root, fname))
 
     return scripts
@@ -22,6 +23,14 @@ def build_js():
   js = get_all_script_paths(False)
   with open("js/app.js", "w") as f:
     f.write(subprocess.check_output(["uglifyjs"] + js + ["-m", "-c"]))
+
+def build_template(template_vars):
+  f = open("index-template.html", "r")
+  template = Template(f.read(), variable_start_string="{[", variable_end_string="]}")
+  f.close()
+  f = open("index.html", "w")
+  f.write(template.render(**template_vars))
+  f.close()
 
 def build(args):
   logger = logging.getLogger("appbuilder")
@@ -32,17 +41,25 @@ def build(args):
     r"^\./\.git",
     r"^\./packages",
     r".+\.py",
-    r"^./js/develop",
     r"^./vendors/fonts",
+    r"^./index-template.html"
   ]
+
+  if args.minified:
+    IGNORED.append(r"^./js/develop")
+  else:
+    IGNORED.append(r"^./js/app.js")
 
   IGNORED_PATTERNS = []
   for i in xrange(len(IGNORED)):
     IGNORED_PATTERNS.append(re.compile(IGNORED[i]))
 
   # Builds JS
-  logger.info("Minifying JS...")
-  build_js()
+  if args.minified:
+    logger.info("Minifying JS...")
+    build_js()
+
+  build_template({"scripts": get_all_script_paths(args.minified)})
 
   now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
   zipname = "packages/package-{}.zip".format(now)
@@ -72,7 +89,6 @@ def server(args):
   import SocketServer
   from StringIO import StringIO
   from SimpleHTTPServer import SimpleHTTPRequestHandler
-  from jinja2 import Template
 
   if args.minified:
     build_js()
@@ -92,7 +108,7 @@ def server(args):
           self.send_header("Location", self.path + "/")
           self.end_headers()
           return None
-        for index in ("index.html", "index.htm"):
+        for index in ("index-template.html", ):
           index = os.path.join(path, index)
           if os.path.exists(index):
             path = index
@@ -101,7 +117,7 @@ def server(args):
           return self.list_directory(path)
       ctype = self.guess_type(path)
       try:
-        if path.endswith(".html") or path.endswith("htm"):
+        if path.endswith("index-template.html"):
           f = open(path, "r")
           template = Template(f.read(), variable_start_string="{[", variable_end_string="]}")
           f.close()

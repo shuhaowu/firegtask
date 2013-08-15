@@ -1,0 +1,16 @@
+<div class="list-style-container" ng-hide="authorized">
+  <div ng-hide="attempting">
+    <p>You need to login before you can use this app!</p>
+    <button ng-click="attemptOAuth()">Login via Google</button>
+  </div>
+  <div ng-show="attempting">
+    <label>Paste the authorization code below</label>
+    <input type="text" ng-model="authcode" />
+    <button ng-click="authorize()">Authorize</button>
+  </div>
+</div>
+
+<div class="list-style-container" ng-show="authorized">
+  <p>You are logged in.</p>
+  <button ng-click="logout()">Logout</button>
+</div>

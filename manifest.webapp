@@ -1,9 +1,9 @@
 {
-  "name": "GTask",
+  "name": "FireGTask",
   "description": "Google Task for your Firefox OS devices",
   "version": "1.0",
   "release_notes": "First release",
-  "launch_path": "/",
+  "launch_path": "/index.html",
   "icons": {
     "128": "/img/icon-128.png"
   },
@@ -11,5 +11,9 @@
     "name": "Shuhao Wu",
     "url": "https://shuhaowu.com"
   },
-  "default_locale": "en"
+  "default_locale": "en",
+  "permissions": {
+    "systemXHR": {}
+  },
+  "type": "privileged"
 }

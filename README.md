@@ -9,6 +9,9 @@ Running
 
 To run this app for local development, you need to install jinja2 and uglifyjs.
 
+You need to go into js/ and copy settings.js-dist to settings.js and fill
+it with your own API keys and such.
+
 Then, simply do
 
     $ ./manage.py server
