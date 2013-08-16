@@ -61,3 +61,10 @@ section[role="status"] a.icon:hover {
   opacity: 1;
 }
 
+.tasklist li > .pack-checkbox {
+  width: 5rem;
+}
+
+section[role="region"].retracted {
+  transform: translateX(80%);
+}

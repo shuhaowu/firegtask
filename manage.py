@@ -4,8 +4,17 @@ import argparse
 import os
 import logging
 import subprocess
+import re
 from jinja2 import Template
 logging.basicConfig(level=logging.DEBUG)
+
+IGNORED = [
+  r"^\./\.git",
+  r"^\./packages",
+  r".+\.py",
+  r"^./vendors/fonts",
+  r"^./index-template.html"
+]
 
 def get_all_script_paths(build=False):
   if build:
@@ -32,18 +41,14 @@ def build_template(template_vars):
   f.write(template.render(**template_vars))
   f.close()
 
+def develop(args):
+  pass
+
+
 def build(args):
   logger = logging.getLogger("appbuilder")
-  import re
   import zipfile
   from datetime import datetime
-  IGNORED = [
-    r"^\./\.git",
-    r"^\./packages",
-    r".+\.py",
-    r"^./vendors/fonts",
-    r"^./index-template.html"
-  ]
 
   if args.minified:
     IGNORED.append(r"^./js/develop")
@@ -150,7 +155,7 @@ def server(args):
 
 dispatch = {
   "build": build,
-  "server": server
+  "server": server,
 }
 
 if __name__ == "__main__":

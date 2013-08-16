@@ -3,9 +3,34 @@
 (function() {
   angular.module("fxgtask").service("GTaskAPI", ["$http", "$q", "OAuthService", function($http, $q, OAuthService) {
 
-    this.tasklists = {
-      list: function() {
+    var API_URL = function() {
+      return "https://www.googleapis.com/tasks/v1" + arguments.join("");
+    };
 
+    this.tasklists = {
+      list: function(maxResults, pageToken) {
+        var deferred = $q.defer();
+
+        var params = {};
+
+        if (maxResults !== undefined)
+          params.maxResults = maxResults;
+        if (pageToken !== undefined)
+          params.pageToken = pageToken;
+
+        var req = $http({
+          method: "GET",
+          url: API_URL("/users/@me/lists"),
+          params: params
+        });
+
+        req.success(function(data) {
+          deferred.resolve(data)
+        }).error(function() {
+          deferred.reject(arguments);
+        });
+
+        return deferred;
       },
       get: function(id) {
 

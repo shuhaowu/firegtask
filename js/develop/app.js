@@ -15,11 +15,19 @@ window.paramify = function(obj) {
 (function() {
   var app = angular.module("fxgtask", []);
 
-  app.config(["$routeProvider", function($routeProvider) {
-    $routeProvider.when("/", {
+  app.config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
+
+    $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix = '!';
+
+    var tasklist = {
       controller: "TasksController",
-      template: "<progress class=\"center\"></progress>"
-    });
+      templateUrl: "partials/tasklist.html"
+    };
+
+    $routeProvider.when("/", tasklist);
+    $routeProvider.when("/tasklist/", tasklist);
+    $routeProvider.when("/tasklist/{tasklistId}", tasklist);
 
     $routeProvider.when("/login", {
       controller: "LoginController",

@@ -6,31 +6,35 @@
   <link rel="stylesheet" href="vendors/fxos.css">
   <link rel="stylesheet" href="css/app.css">
 </head>
-<body role="application" ng-app="fxgtask">
+<body role="application" ng-app="fxgtask" ng-csp>
   <section data-type="sidebar">
     <header>
       <h1>Menu</h1>
     </header>
     <nav>
-      <ul>
-        <li><a href="#">Tasks</a></li>
-        <li><a href="#settings">Settings</a></li>
-        <li><a href="#login">Login via Google</a></li>
+      <ul ng-controller="TasklistsController">
+        <li ng-repeat="tasklist in tasklists"><a ng-href="/tasklist/{{ tasklist.id }}">{{ tasklist.title }}</a></li>
       </ul>
       <h2>Logistics</h2>
       <ul>
-        <li><a href="#about">About</a></li>
+        <li><a href="/settings">Settings</a></li>
+        <li><a href="/login">Login via Google</a></li>
+        <li><a href="/about">About</a></li>
         <li><a href="">Code</a></li>
       </ul>
     </nav>
   </section>
 
-  <section id="drawer" role="region">
+  <section id="drawer" role="region" ng-controller="HeaderController" ng-class="{retracted: retracted}">
     <header class="fixed">
-      <a href="#"><span class="icon icon-menu">hide sidebar</span></a>
-      <a href="#drawer"><span class="icon icon-menu">show sidebar</span></a>
+      <a href="" ng-click="toggleSidebar()"><span class="icon icon-menu"></span></a>
+
+      <menu type="toolbar">
+        <button><span class="icon icon-add">add</span></button>
+      </menu>
       <h1 id="title">FireGTask</h1>
     </header>
+    <br />
     <article class="content scrollable header">
       <ng-view></ng-view>
     </article>
